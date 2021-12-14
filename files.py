@@ -1,5 +1,28 @@
 from os import listdir, getcwd
-from os.path import isfile, join, splitext
+from os.path import isfile, join, splitext, isdir
+
+def isDirectory(path): # Check if a given file path is a file or a directory
+	if isdir(path):
+	    return True
+	else:
+		return False
+
+def fileLabel(file, extension):
+	# icon = ""
+	# if extension == "folder":
+	# 	icon = u"\U0001F4C1"
+	# elif extension == ".png":
+	# 	icon = u"\U0001F5BC"
+	# elif extension == ".txt" or extension == ".text":
+	# 	icon = u"\U0001F5B9"
+	# elif extension == ".doc" or extension == ".docx" or extension == ".pdf":
+	# 	icon = u"\U0001F5BA"
+	# else:
+	# 	icon = u"\u003F"
+
+	label = f"{file}"
+	return label
+
 
 def getAllFilesInGivenDirectory(path):
 	# files = [f for f in listdir(path) if isfile(join(path, f))]
@@ -9,30 +32,19 @@ def getAllFilesInGivenDirectory(path):
 	for file in dirs:
 		filePath = path + "/" + file
 		name, extension = splitext(filePath)
-		if extension == "": extension = "folder"
-		files.append({"name": file, "path": filePath, "type": extension})
+		if extension == "" and isDirectory(filePath) : extension = "folder"
+		files.append({"name": file, "label": fileLabel(file, extension), "path": filePath, "type": extension})
 
 
 	return files
 
-def listFiles(files):
-	icon = ""
-	for file in files:
-		if file["type"] == "folder":
-			icon = u"\U0001F4C1"
-		elif file["type"] == ".png":
-			icon = u"\U0001F5BC"
-		else:
-			icon = u"\u003F"
 
-		print(icon + " " + file["name"])
 
 def getCurrentDirectory():
 	currentDirectory = getcwd()
 	return currentDirectory
 
 def main():
-	#print(u"\U0001F4C1")
 	#print(f"Your current directory: {getCurrentDirectory()}")
 	path = "/Users/aysilsimge/School/5. Dönem"
 	listFiles(getAllFilesInGivenDirectory(path))
