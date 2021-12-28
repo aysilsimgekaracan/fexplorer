@@ -3,7 +3,6 @@ import curses
 import files as fl
 
 
-
 def get_label(option): 
 	return option.get("label")
 
