@@ -10,12 +10,17 @@ def returnHome(picker): # Return to home directory
     # path = fl.getHomeDirectory()
     path = "/Users/aysilsimge/School/5. Dönem"
     cli(path)
+    
+def quit(picker):
+    return -1
 
 def cli(path):
 	options = fl.getAllFilesInGivenDirectory(path)
 	title = f'Files in location: {path}'
 	picker = Picker(options, title, indicator="=>", options_map_func=get_label)
 	picker.register_custom_handler(ord('h'), returnHome)
+	picker.register_custom_handler(ord('q'), quit)
+ 
 	# picker.register_custom_handler(ord("b"), returnBack)
  
 	option, index = picker.start()
