@@ -58,7 +58,7 @@ def getHomeDirectory(): # Users home address
     return expanduser('~')
 
 def main():
-    	#print(f"Your current directory: {getCurrentDirectory()}")
+	#print(f"Your current directory: {getCurrentDirectory()}")
 	path = "/Users/aysilsimge/School/5. Dönem"
 	# print(getAllFilesInGivenDirectory(path))
 	# print(getParentDirectory(path))

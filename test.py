@@ -4,14 +4,17 @@ def secondFunc():
     output = input("any number: ")
     print(output)
     cli()
+    
+def edit(picker):
+    print(picker.all_selected)
 
 def cli():
     options = ['Java', 'JavaScript', 'Python', 'PHP', 'C++', 'Erlang', 'Haskell']
     title = 'Please choose your favorite programming language (press SPACE to mark, ENTER to continue): '
     selected = pick(options, title, multiselect=True, min_selection_count=1)
- 
-    print(selected)
-    secondFunc()
+    selected.register_custom_handler(ord('e'), edit)
+    # print(selected)
+    # secondFunc()
 
 
 
@@ -23,3 +26,4 @@ def main():
 
 if __name__ == "__main__":
 	main()
+ 
