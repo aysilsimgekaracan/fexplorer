@@ -15,6 +15,8 @@ def isDirectory(path): # Check if a given file path is a file or a directory
 
 def getFileDetails(filePath):
     filePath = filePath.replace(" ", "\ ")
+    filePath = filePath.replace("(", "\(")
+    filePath = filePath.replace(")", "\)")
     
     output = popen("ls -ld " + filePath + " | awk '{print $1, $2, $3, $4, $5, $6, $7, $8}'").read()
     return output
@@ -38,6 +40,7 @@ def getAllFilesInGivenDirectory(path):
 
 	# Add Parent Directory
 	parentPath = getParentDirectory(path)
+ 
 	files.append({"name": "Parent Directory", "label": "[Back]", "path": parentPath, "type": "folder"})
 	return files
 
@@ -59,7 +62,7 @@ def main():
 	path = "/Users/aysilsimge/School/5. Dönem"
 	# print(getAllFilesInGivenDirectory(path))
 	# print(getParentDirectory(path))
-	print(getFileDetails(path))
+	# print(getFileDetails(path))
 
 # def goBackDirectory(path):
 #     return dirname(path)

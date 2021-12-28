@@ -1,6 +1,7 @@
 from pick import Picker
 import curses
 import files as fl
+import os
 
 
 def get_label(option): 
@@ -28,7 +29,7 @@ def cli(path):
 	if fl.isDirectory(option.get("path")):
 		cli(option.get("path"))
 
-	print(option, index)
+	# print(option, index)
 
 
 def main():
@@ -38,6 +39,7 @@ def main():
 
 
 if __name__ == "__main__":
+	os.system('cls||clear')
 	main()
 
 
