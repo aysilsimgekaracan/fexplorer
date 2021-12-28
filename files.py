@@ -1,6 +1,7 @@
-from os import listdir, getcwd
+from os import listdir, getcwd, popen
 from os.path import splitext, isdir, expanduser
 from pathlib import Path
+import subprocess
 
 def isDirectory(path): # Check if a given file path is a file or a directory
 	if isdir(path):
@@ -8,12 +9,19 @@ def isDirectory(path): # Check if a given file path is a file or a directory
 	else:
 		return False
 
-def fileLabel(file, extension):
-    label = f"{file}"
-    return label
+# def fileLabel(file, extension):
+#     label = f"{file}"
+#     return label
+
+def getFileDetails(filePath):
+    filePath = filePath.replace(" ", "\ ")
+    
+    output = popen("ls -ld " + filePath + " | awk '{print $1, $2, $3, $4, $5, $6, $7, $8}'").read()
+    return output
 
 # find all files and folders in a given path
 def getAllFilesInGivenDirectory(path):
+    
 	# files = [f for f in listdir(path) if isfile(join(path, f))]
 	dirs = listdir(path)
 	
@@ -21,8 +29,9 @@ def getAllFilesInGivenDirectory(path):
 	for file in dirs:
 		filePath = path + "/" + file
 		name, extension = splitext(filePath)
+		fileDetails = getFileDetails(filePath)
 		if extension == "" and isDirectory(filePath) : extension = "folder"
-		files.append({"name": file, "label": fileLabel(file, extension), "path": filePath, "type": extension})
+		files.append({"name": file, "label": f"{file}                       {fileDetails}", "path": filePath, "type": extension, "fileDetails": fileDetails})
 
 	# Add Parent Directory
 	parentPath = getParentDirectory(path)
@@ -45,8 +54,9 @@ def getHomeDirectory(): # Users home address
 def main():
     	#print(f"Your current directory: {getCurrentDirectory()}")
 	path = "/Users/aysilsimge/School/5. Dönem"
-	print(getAllFilesInGivenDirectory(path))
+	# print(getAllFilesInGivenDirectory(path))
 	# print(getParentDirectory(path))
+	print(getFileDetails(path))
 
 # def goBackDirectory(path):
 #     return dirname(path)
