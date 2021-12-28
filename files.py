@@ -25,13 +25,16 @@ def getAllFilesInGivenDirectory(path):
 	# files = [f for f in listdir(path) if isfile(join(path, f))]
 	dirs = listdir(path)
 	
+	max_lenght = max([len(d) for d in dirs]) + 20
+ 
 	files =[]
 	for file in dirs:
 		filePath = path + "/" + file
 		name, extension = splitext(filePath)
 		fileDetails = getFileDetails(filePath)
+		spaceLenght = max_lenght - len(file)
 		if extension == "" and isDirectory(filePath) : extension = "folder"
-		files.append({"name": file, "label": f"{file}                       {fileDetails}", "path": filePath, "type": extension, "fileDetails": fileDetails})
+		files.append({"name": file, "label": file + ' '*spaceLenght + fileDetails, "path": filePath, "type": extension, "fileDetails": fileDetails})
 
 	# Add Parent Directory
 	parentPath = getParentDirectory(path)
