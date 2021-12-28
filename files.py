@@ -9,18 +9,6 @@ def isDirectory(path): # Check if a given file path is a file or a directory
 		return False
 
 def fileLabel(file, extension):
-    # icon = ""
-	# if extension == "folder":
-	# 	icon = u"\U0001F4C1"
-	# elif extension == ".png":
-	# 	icon = u"\U0001F5BC"
-	# elif extension == ".txt" or extension == ".text":
-	# 	icon = u"\U0001F5B9"
-	# elif extension == ".doc" or extension == ".docx" or extension == ".pdf":
-	# 	icon = u"\U0001F5BA"
-	# else:
-	# 	icon = u"\u003F"
- 
     label = f"{file}"
     return label
 
