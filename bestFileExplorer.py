@@ -1,6 +1,7 @@
 from pick import Picker
 import curses
 import files as fl
+import os
 
 
 def get_label(option): 
@@ -10,12 +11,17 @@ def returnHome(picker): # Return to home directory
     # path = fl.getHomeDirectory()
     path = "/Users/aysilsimge/School/5. Dönem"
     cli(path)
+    
+def quit(picker):
+    return -1
 
 def cli(path):
 	options = fl.getAllFilesInGivenDirectory(path)
 	title = f'Files in location: {path}'
 	picker = Picker(options, title, indicator="=>", options_map_func=get_label)
 	picker.register_custom_handler(ord('h'), returnHome)
+	picker.register_custom_handler(ord('q'), quit)
+ 
 	# picker.register_custom_handler(ord("b"), returnBack)
  
 	option, index = picker.start()
@@ -23,7 +29,7 @@ def cli(path):
 	if fl.isDirectory(option.get("path")):
 		cli(option.get("path"))
 
-	print(option, index)
+	# print(option, index)
 
 
 def main():
@@ -33,6 +39,7 @@ def main():
 
 
 if __name__ == "__main__":
+	os.system('cls||clear')
 	main()
 
 
