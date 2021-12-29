@@ -1,12 +1,8 @@
-# import os
-
-
-# cmd_1 = "ls -la"
-
-# os.system(cmd_1)
-
+import os
 import subprocess
 
-proc = subprocess.Popen(["cat", "/etc/services"], stdout=subprocess.PIPE, shell=True)
-(out, err) = proc.communicate()
-print(out)
+os.system("ls -l")
+
+subprocess.call("cpu_util.sh")
+
+subprocess.run('while true; do CPU_USAGE=$(top -b -n2 -p 1 | fgrep "Cpu(s)"); DATE=$(date "+%Y-%m-%d %H:%M:"); echo $DATE - $CPU_USAGE >> cpu_usage; echo Recorded; sleep 5s; done', shell=True)

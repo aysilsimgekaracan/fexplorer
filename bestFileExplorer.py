@@ -39,7 +39,7 @@ def main():
 
 
 if __name__ == "__main__":
-	os.system('cls||clear')
+	os.system('clear')
 	main()
 
 
