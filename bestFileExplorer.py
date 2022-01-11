@@ -1,3 +1,4 @@
+from typing import Optional
 from pick import Picker
 import curses
 import files as fl
@@ -66,7 +67,7 @@ def main():
 
 
 if __name__ == "__main__":
-	os.system('cls||clear')
+	os.system('clear')
 	main()
 
 

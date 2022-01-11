@@ -40,8 +40,10 @@ def getAllFilesInGivenDirectory(path):
 
 	# Add Parent Directory
 	parentPath = getParentDirectory(path)
- 
 	files.append({"name": "Parent Directory", "label": "[Back]", "path": parentPath, "type": "folder"})
+ 
+	# Add An Option to Quit
+	files.append({"label": "[Quit]", "type": "quit"})
 	return files
 
 # Go one directory back
