@@ -29,14 +29,21 @@ def returnHome(picker): # Return to home directory
     path = "/Users/aysilsimge/School/5. Dönem"
     cli(path)
     
-def quit(picker):
-    return -1
-
 def edit(picker):
-
-    option = picker.options[picker.all_selected[0]]
-    # picker.title = option.get("path")
-    detailCli(option)
+    if picker.all_selected != []:
+        option = picker.options[picker.all_selected[0]]
+        # picker.title = option.get("path")
+        detailCli(option)
+    
+# def helpCli(picker, path):
+#     title = """
+#             ***INSTRUCTIONS***
+#     - Navigation is done with the arrow keys [←↑→↓]
+#     - To Browse Folders: First Select a folder by pressing [SPACE] then [ENTER]\n"
+#     - To Edit An File: Select a file with [SPACE] and press [E]
+#     - To Return Home: Press [R]
+#     """
+#     print(title, path)
 
 def cli(path):
 
@@ -44,20 +51,22 @@ def cli(path):
     title = f'Files in location: {path}'
     picker = Picker(options, title, indicator="=>", options_map_func=get_label)
     picker.multiselect = True
-    picker.register_custom_handler(ord('h'), returnHome)
-    picker.register_custom_handler(ord('q'), quit)
+    picker.register_custom_handler(ord('r'), returnHome)
     picker.register_custom_handler(ord('e'), edit)
  
     # picker.register_custom_handler(ord("b"), returnBack)
     
     tuples = picker.start()
-    print(tuples)
-    option, index = tuples[0]
-   
-    if fl.isDirectory(option.get("path")):
-        cli(option.get("path"))
+    
+    if tuples != []:
+        option, index = tuples[0]
+    
+        if fl.isDirectory(option.get("path")):
+            cli(option.get("path"))
 
-	# print(option, index)
+        # print(option, index)
+    else:
+        cli(path)
 
 
 def main():
