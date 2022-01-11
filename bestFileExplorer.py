@@ -5,8 +5,42 @@ import files as fl
 import os
 
 def get_label(option):
-    print()
+    # print()
     return option.get("label")
+
+def changePermissionScreen(option):
+    path = option.get("path")
+    os.system('clear')
+    print(option.get("name") + "\n" + path)
+    print("Old Permissions: " + option.get("fileDetails"))
+
+def permissionChangeCli(option):
+    
+    title = "Change permissions of the file: " + option.get("name")
+    options = ["Change User Permission", "Change Group Permission", "Change Others's Permission", "Return Back"]
+    
+    permissionPicker = Picker(options, title, indicator="*")
+    selectedOption, index = permissionPicker.start()
+    
+    if index == 0:
+        changePermissionScreen(option)
+        
+def renameCli(option):
+        path = option.get("path")
+    
+        os.system('clear')
+        print("Change name of the file: " + option.get("name"))
+        newName = input("New File Name: ")
+        
+        parentDir = fl.getParentDirectory(path)
+        newPath = parentDir + f"/{newName}"
+        
+        fl.renameFile(path, newPath)
+        
+        print("File Name is changed!")
+        os.system('sleep 2')
+        cli(parentDir)
+        
 
 def detailCli(option):
     path = option.get("path")
@@ -15,13 +49,17 @@ def detailCli(option):
     
     options = ["Change Permissions", "Rename", "Back"]
     
-    if fl.isDirectory(path):
-        options.append("Go to directory")
+    # if fl.isDirectory(path):
+    #     options.append("Go to directory")
         
     detailPicker = Picker(options, title, indicator="*")
-    option, index = detailPicker.start()
+    selectedOption, index = detailPicker.start()
     
-    if index == 3:
+    if index == 0:
+        permissionChangeCli(option)
+    elif index == 1:
+        renameCli(option)
+    if index == 2:
         cli(path)
 
 def returnHome(picker): # Return to home directory
@@ -34,6 +72,8 @@ def edit(picker):
         option = picker.options[picker.all_selected[0]]
         # picker.title = option.get("path")
         detailCli(option)
+    
+    return (-1, None)
     
 # def helpCli(picker, path):
 #     title = """
@@ -59,11 +99,11 @@ def cli(path):
     tuples = picker.start()
     
     if tuples != []:
-        option, index = tuples[0]
-    
-        if fl.isDirectory(option.get("path")):
-            cli(option.get("path"))
-
+        if tuples[0] != -1:
+            option, index = tuples[0]
+        
+            if fl.isDirectory(option.get("path")):
+                cli(option.get("path"))
         # print(option, index)
     else:
         cli(path)

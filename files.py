@@ -1,4 +1,4 @@
-from os import listdir, getcwd, popen
+from os import listdir, getcwd, popen, rename
 from os.path import splitext, isdir, expanduser
 from pathlib import Path
 import subprocess
@@ -18,8 +18,11 @@ def getFileDetails(filePath):
     filePath = filePath.replace("(", "\(")
     filePath = filePath.replace(")", "\)")
     
-    output = popen("ls -ld " + filePath + " | awk '{print $1, $2, $3, $4, $5, $6, $7, $8}'").read()
-    return output
+    allDetails = popen("ls -ld " + filePath + " | awk '{print $1, $2, $3, $4, $5, $6, $7, $8}'").read()
+    return allDetails
+
+def renameFile(oldFilePath, newFilePath):
+    rename(oldFilePath, newFilePath)
 
 # find all files and folders in a given path
 def getAllFilesInGivenDirectory(path):
