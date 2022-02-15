@@ -1,4 +1,4 @@
-from os import listdir, getcwd, popen, rename
+from os import listdir, getcwd, popen, rename, system
 from os.path import splitext, isdir, expanduser
 from pathlib import Path
 import subprocess
@@ -62,6 +62,19 @@ def getCurrentDirectory():
 
 def getHomeDirectory(): # Users home address
     return expanduser('~')
+
+def changePermission(permisson_list, path):
+	path = path.replace(" ", "\ ")
+	path = path.replace("(", "\(")
+	path = path.replace(")", "\)")
+    
+	permissions = ""
+	for perms in permisson_list:
+		sum = 0
+		for p in perms:
+			sum += p.get("val")
+		permissions += str(sum)
+	system(f"chmod {permissions} {path}")
 
 def main():
 	#print(f"Your current directory: {getCurrentDirectory()}")

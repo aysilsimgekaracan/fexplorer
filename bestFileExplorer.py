@@ -32,25 +32,46 @@ def permissionChangeCli(option):
         
         if permissions != []:
             newPermissionsTitle = ""
-            for perms in permissions:
-                t = ""
-                for p in perms:
-                    t += p.get("char")
+            for permission in permissions:
+                sum = 0
+                for p in permission:
+                    sum += p.get("val")
                 
-                t += "-"
-                newPermissionsTitle += t
+                if sum == 0:
+                    newPermissionsTitle += "---"
+                elif sum == 1:
+                    newPermissionsTitle += "--x"
+                elif sum == 2:
+                    newPermissionsTitle += "-w-"
+                elif sum == 3:
+                    newPermissionsTitle += "-wx"
+                elif sum == 4:
+                    newPermissionsTitle += "r--"
+                elif sum == 5:
+                    newPermissionsTitle += "r-x"
+                elif sum == 6:
+                    newPermissionsTitle += "rw-"
+                elif sum == 7:
+                    newPermissionsTitle += "rwx"
                 
-        title += newPermissionsTitle
+            title += newPermissionsTitle
         
         options = [ {"label": "No Permission", "char": "-", "val": 0 }, {"label": "Execute", "char": "x", "val": 1 }, {"label": "Write", "char": "w", "val": 2 }, {"label": "Read", "char": "r", "val": 4 } ]
         
-        permissionPicker = Picker(options, title, indicator="*", options_map_func=get_label, min_selection_count=1)
+        permissionPicker = Picker(options, title, indicator="=>", options_map_func=get_label, min_selection_count=1)
         permissionPicker.multiselect = True
         tuples = permissionPicker.start()
         
-        newPerms = [option for option, index in tuples]
         
+        newPerms = [option for option, index in tuples]
         permissions.append(newPerms)
+    parentDir = fl.getParentDirectory(option.get("path"))
+    
+    fl.changePermission(permissions, option.get("path"))
+    print("Permissions have changed!...")
+    os.system('sleep 2')
+    
+    cli(parentDir)
                 
         
 def renameCli(option):
