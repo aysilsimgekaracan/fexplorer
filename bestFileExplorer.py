@@ -8,22 +8,50 @@ def get_label(option):
     # print()
     return option.get("label")
 
-def changePermissionScreen(option):
-    path = option.get("path")
-    os.system('clear')
-    print(option.get("name") + "\n" + path)
-    print("Old Permissions: " + option.get("fileDetails"))
+# def changePermissionScreen(option):
+#     path = option.get("path")
+#     os.system('clear')
+#     print(option.get("name") + "\n" + path)
+#     print("Old Permissions: " + option.get("fileDetails"))
 
 def permissionChangeCli(option):
+    title = "Current Permissions: " + option.get("fileDetails") + "\n"
     
-    title = "Change permissions of the file: " + option.get("name")
-    options = ["Change User Permission", "Change Group Permission", "Change Others's Permission", "Return Back"]
+    permissions = []
     
-    permissionPicker = Picker(options, title, indicator="*")
-    selectedOption, index = permissionPicker.start()
-    
-    if index == 0:
-        changePermissionScreen(option)
+    for i in range(3):
+        perm_title = ""
+        
+        if i == 0:
+            perm_title = "user"
+        elif i == 1:
+            perm_title = "group"
+        else:
+            perm_title = "other's"
+        title = f"Change {perm_title} permissions of the file: " + option.get("name") + "\n"
+        
+        if permissions != []:
+            newPermissionsTitle = ""
+            for perms in permissions:
+                t = ""
+                for p in perms:
+                    t += p.get("char")
+                
+                t += "-"
+                newPermissionsTitle += t
+                
+        title += newPermissionsTitle
+        
+        options = [ {"label": "No Permission", "char": "-", "val": 0 }, {"label": "Execute", "char": "x", "val": 1 }, {"label": "Write", "char": "w", "val": 2 }, {"label": "Read", "char": "r", "val": 4 } ]
+        
+        permissionPicker = Picker(options, title, indicator="*", options_map_func=get_label, min_selection_count=1)
+        permissionPicker.multiselect = True
+        tuples = permissionPicker.start()
+        
+        newPerms = [option for option, index in tuples]
+        
+        permissions.append(newPerms)
+                
         
 def renameCli(option):
         path = option.get("path")
