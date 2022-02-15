@@ -55,6 +55,7 @@ def permissionChangeCli(option):
         
 def renameCli(option):
         path = option.get("path")
+        extension = option.get("type")
     
         os.system('clear')
         print("Change name of the file: " + option.get("name"))
@@ -62,6 +63,8 @@ def renameCli(option):
         
         parentDir = fl.getParentDirectory(path)
         newPath = parentDir + f"/{newName}"
+        
+        if extension != "folder": newPath += str(extension)
         
         fl.renameFile(path, newPath)
         
@@ -138,8 +141,8 @@ def cli(path):
 
 
 def main():
-#	path = fl.getCurrentDirectory() # Start with the directory that you are currently in
-	path = "/Users/aysilsimge/School/5. Dönem"
+	path = fl.getCurrentDirectory() # Start with the directory that you are currently in
+	# path = "/Users/aysilsimge/School/5. Dönem/Systems Programming/File Explorer/File-Explorer/exampleFile"
 	cli(path)
 
 
