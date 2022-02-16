@@ -76,17 +76,17 @@ def changePermission(permisson_list, path):
 		permissions += str(sum)
 	system(f"chmod {permissions} {path}")
 
-def main():
-	#print(f"Your current directory: {getCurrentDirectory()}")
-	path = "/Users/aysilsimge/"
-	files = getAllFilesInGivenDirectory(path)
-	for file in files:
-		print(file)
-	# print(getParentDirectory(path))
-	# print(getFileDetails(path))
+# def main():
+# 	#print(f"Your current directory: {getCurrentDirectory()}")
+# 	path = "/Users/aysilsimge/"
+# 	files = getAllFilesInGivenDirectory(path)
+# 	for file in files:
+# 		print(file)
+# 	# print(getParentDirectory(path))
+# 	# print(getFileDetails(path))
 
 # def goBackDirectory(path):
 #     return dirname(path)
 
-if __name__ == "__main__":
-    main()
+# if __name__ == "__main__":
+#     main()

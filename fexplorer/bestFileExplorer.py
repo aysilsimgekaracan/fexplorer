@@ -1,7 +1,7 @@
 from typing import Optional
 from pick import Picker
 import curses
-import files as fl
+import fexplorer.files as fl
 import os
 
 def get_label(option):
@@ -152,24 +152,25 @@ def cli(path):
     
     if tuples != []:
         if tuples[0] != -1:
+            
             option, index = tuples[0]
-        
-            if fl.isDirectory(option.get("path")):
-                cli(option.get("path"))
-        # print(option, index)
+            
+            if option.get("label") != "[Quit]":
+                if fl.isDirectory(option.get("path")):
+                    cli(option.get("path"))
     else:
         cli(path)
 
 
-def main():
-	path = fl.getCurrentDirectory() # Start with the directory that you are currently in
-	# path = "/Users/aysilsimge/School/5. Dönem/Systems Programming/File Explorer/File-Explorer/exampleFile"
-	cli(path)
+# def main():
+# 	path = fl.getCurrentDirectory() # Start with the directory that you are currently in
+# 	# path = "/Users/aysilsimge/School/5. Dönem/Systems Programming/File Explorer/File-Explorer/exampleFile"
+# 	cli(path)
 
 
-if __name__ == "__main__":
-	os.system('clear')
-	main()
+# if __name__ == "__main__":
+# 	os.system('clear')
+# 	main()
 
 
 # def returnBack(picker):
