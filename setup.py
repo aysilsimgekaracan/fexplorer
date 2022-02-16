@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
   name = 'fexplorer',         # How you named your package folder (MyLib)
   packages = find_packages(include=['fexplorer', 'fexplorer.*']) ,   # Chose the same as "name"
-  version = '0.1.2',      # Start with a small number and increase it with every change you make
+  version = '0.0.1',      # Start with a small number and increase it with every change you make
   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'Simple file explorer made with python',   # Give a short description about your library
   author = 'aysilsimgekaracan',                   # Type in your name
