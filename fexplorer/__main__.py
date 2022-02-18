@@ -1,6 +1,7 @@
 from fexplorer.bestFileExplorer import cli
 from fexplorer.files import getCurrentDirectory, isDirectory, getParentDirectory
 import argparse
+import os
 
 def main():
     parser = argparse.ArgumentParser()
@@ -8,6 +9,8 @@ def main():
     args = parser.parse_args()
     args = vars(args)
     path = args.get("path")
+    
+    os.system('clear')
     
     if not isDirectory(path) or path == "." or path == "..":
         if path == ".":
@@ -21,5 +24,3 @@ def main():
             print("Your path is not a directory")
     else:
         cli(path)
-
-main()
