@@ -25,6 +25,6 @@ setup(
     'Programming Language :: Python :: 3.6',
   ],
   entry_points= {
-        'console_scripts': ['fexplorer=fexplorer.argparser:main']
+        'console_scripts': ['fexplorer=fexplorer.__main__:main']
     }
 )
