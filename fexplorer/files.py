@@ -40,9 +40,10 @@ def getAllFilesInGivenDirectory(path):
 				filePath = path + "/" + file
 				name, extension = splitext(filePath)
 				fileDetails = getFileDetails(filePath)
-				spaceLenght = max_lenght - len(file)
 				if extension == "" and isDirectory(filePath) : extension = "folder"
-				files.append({"name": file, "label": file + ' '*spaceLenght + fileDetails, "path": filePath, "type": extension, "fileDetails": fileDetails})
+				spaceLenght = max_lenght - len(file)
+				icon = u"\U0001F4C1" if isDirectory(filePath) else "  "
+				files.append({"name": file, "label": icon + " " + file + ' '*spaceLenght + fileDetails, "path": filePath, "type": extension, "fileDetails": fileDetails})
 
 	# Add Parent Directory
 	parentPath = getParentDirectory(path)
