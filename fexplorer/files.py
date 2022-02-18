@@ -29,18 +29,20 @@ def getAllFilesInGivenDirectory(path):
     
 	# files = [f for f in listdir(path) if isfile(join(path, f))]
 	dirs = listdir(path)
-	
-	max_lenght = max([len(d) for d in dirs]) + 10
- 
 	files =[]
-	for file in dirs:
-		if file[0] != ".":
-			filePath = path + "/" + file
-			name, extension = splitext(filePath)
-			fileDetails = getFileDetails(filePath)
-			spaceLenght = max_lenght - len(file)
-			if extension == "" and isDirectory(filePath) : extension = "folder"
-			files.append({"name": file, "label": file + ' '*spaceLenght + fileDetails, "path": filePath, "type": extension, "fileDetails": fileDetails})
+ 
+	if len(dirs) != 0:
+		max_lenght = max([len(d) for d in dirs]) + 10
+	
+		
+		for file in dirs:
+			if file[0] != ".":
+				filePath = path + "/" + file
+				name, extension = splitext(filePath)
+				fileDetails = getFileDetails(filePath)
+				spaceLenght = max_lenght - len(file)
+				if extension == "" and isDirectory(filePath) : extension = "folder"
+				files.append({"name": file, "label": file + ' '*spaceLenght + fileDetails, "path": filePath, "type": extension, "fileDetails": fileDetails})
 
 	# Add Parent Directory
 	parentPath = getParentDirectory(path)
