@@ -80,7 +80,7 @@ def changePermission(permisson_list, path):
 		permissions += str(sum)
 	system(f"chmod {permissions} {path}")
  
-def copy(sourcePath, destinationPath):
+def cp(sourcePath, destinationPath):
 	destinationPath = destinationPath.replace(" ", "\ ")
 	destinationPath = destinationPath.replace("(", "\(")
 	destinationPath = destinationPath.replace(")", "\)")
@@ -95,7 +95,24 @@ def copy(sourcePath, destinationPath):
 	else:
 		system(f"cp {sourcePath} {destinationPath}")
 		print("Successful")
-		system('sleep 10')
+		system('sleep 2')
+  
+def mv(sourcePath, destinationPath):
+	destinationPath = destinationPath.replace(" ", "\ ")
+	destinationPath = destinationPath.replace("(", "\(")
+	destinationPath = destinationPath.replace(")", "\)")
+
+	sourcePath = sourcePath.replace(" ", "\ ")
+	sourcePath = sourcePath.replace("(", "\(")
+	sourcePath = sourcePath.replace(")", "\)")
+
+	if not isDirectory(destinationPath):
+		print("The new path is not valid")
+		system('sleep 2')
+	else:
+		system(f"mv {sourcePath} {destinationPath}")
+		print("Successful")
+		system('sleep 2')
  
 
 # def main():

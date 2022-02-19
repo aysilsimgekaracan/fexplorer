@@ -101,15 +101,27 @@ def copyCli(option):
     
     parentPath = fl.getParentDirectory(path)
     
-    fl.copy(path, newPath) 
+    fl.cp(path, newPath) 
     cli(parentPath)
+
+def moveCli(option):
+    path = option.get("path")
+    
+    print("Move" + option.get("name"))
+    newPath = input("Destination: ")
+    
+    parentPath = fl.getParentDirectory(path)
+    
+    fl.mv(path, newPath)
+    cli(parentPath)
+
     
 def detailCli(option):
     path = option.get("path")
     
     title = option.get("name") + "\n" + path + "\n" + option.get("fileDetails")
     
-    options = ["Change Permissions", "Rename", "Copy", "Back"]
+    options = ["Change Permissions", "Rename", "Copy", "Move", "Back"]
     
     # if fl.isDirectory(path):
     #     options.append("Go to directory")
@@ -123,6 +135,8 @@ def detailCli(option):
         renameCli(option)
     elif index == 2:
         copyCli(option)
+    elif index == 3:
+        moveCli(option)
     if index == len(options) - 1:
         cli(fl.getParentDirectory(path))
         print(fl.getParentDirectory(path))
