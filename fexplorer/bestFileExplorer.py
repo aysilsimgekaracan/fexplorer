@@ -3,6 +3,8 @@ from pick import Picker
 import curses
 import fexplorer.files as fl
 import os
+from fexplorer.mode import MODE
+from fexplorer.customscript import customScript
 
 def get_label(option):
     # print()
@@ -206,7 +208,10 @@ def cli(path):
                 if fl.isDirectory(option.get("path")):
                     cli(option.get("path"))
                 else:
-                    readFileCli(option.get("path"))
+                    if MODE.getMode() == "n":
+                        readFileCli(option.get("path"))
+                    else:
+                        customScript()
     else:
         cli(path)
 
