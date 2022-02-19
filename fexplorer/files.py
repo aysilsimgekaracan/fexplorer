@@ -91,11 +91,12 @@ def cp(sourcePath, destinationPath):
  
 	if not isDirectory(destinationPath):
 		print("The new path is not valid")
-		system('sleep 2')
 	else:
-		system(f"cp {sourcePath} {destinationPath}")
+		system(f"cp -r {sourcePath} {destinationPath}")
 		print("Successful")
-		system('sleep 2')
+	
+	system('sleep 2')
+
   
 def mv(sourcePath, destinationPath):
 	destinationPath = destinationPath.replace(" ", "\ ")
@@ -108,11 +109,10 @@ def mv(sourcePath, destinationPath):
 
 	if not isDirectory(destinationPath):
 		print("The new path is not valid")
-		system('sleep 2')
 	else:
-		system(f"mv {sourcePath} {destinationPath}")
+		system(f"mv -r {sourcePath} {destinationPath}")
 		print("Successful")
-		system('sleep 2')
+	system('sleep 2')
  
 
 # def main():
