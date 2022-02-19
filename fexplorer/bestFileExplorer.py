@@ -5,14 +5,8 @@ from fexplorer.mode import MODE
 from fexplorer.customscript import customScript
 
 def get_label(option):
-    # print()
     return option.get("label")
 
-# def changePermissionScreen(option):
-#     path = option.get("path")
-#     os.system('clear')
-#     print(option.get("name") + "\n" + path)
-#     print("Old Permissions: " + option.get("fileDetails"))
 
 def permissionChangeCli(option):
     title = "Current Permissions: " + option.get("fileDetails") + "\n"
@@ -123,9 +117,6 @@ def detailCli(option):
     
     options = ["Change Permissions", "Rename", "Copy", "Move", "Back"]
     
-    # if fl.isDirectory(path):
-    #     options.append("Go to directory")
-        
     detailPicker = Picker(options, title, indicator="*")
     selectedOption, index = detailPicker.start()
     
@@ -159,30 +150,16 @@ def readFileCli(path):
         os.system("sleep 2")
         cli(fl.getParentDirectory(path))
     
-    
-
 def returnHome(picker): # Return to home directory
-    # path = fl.getHomeDirectory()
-    path = "/Users/aysilsimge/School/5. Dönem"
+    path = fl.getHomeDirectory()
     cli(path)
     
 def edit(picker):
     if picker.all_selected != []:
         option = picker.options[picker.all_selected[0]]
-        # picker.title = option.get("path")
         detailCli(option)
     
     return (-1, None)
-    
-# def helpCli(picker, path):
-#     title = """
-#             ***INSTRUCTIONS***
-#     - Navigation is done with the arrow keys [←↑→↓]
-#     - To Browse Folders: First Select a folder by pressing [SPACE] then [ENTER]\n"
-#     - To Edit An File: Select a file with [SPACE] and press [E]
-#     - To Return Home: Press [R]
-#     """
-#     print(title, path)
 
 def cli(path):
 
@@ -212,21 +189,3 @@ def cli(path):
                         customScript()
     else:
         cli(path)
-
-
-# def main():
-# 	path = fl.getCurrentDirectory() # Start with the directory that you are currently in
-# 	# path = "/Users/aysilsimge/School/5. Dönem/Systems Programming/File Explorer/File-Explorer/exampleFile"
-# 	cli(path)
-
-
-# if __name__ == "__main__":
-# 	os.system('clear')
-# 	main()
-
-
-# def returnBack(picker):
-#     path = fl.getCurrentDirectory()
-#     # print("Option in return back" + path)
-#     path = fl.goBackDirectory(path)
-#     cli(path)
