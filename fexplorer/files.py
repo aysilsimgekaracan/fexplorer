@@ -41,7 +41,6 @@ Finds all files and folders in a given path
 Returns list of all files with a dict of name, label, file detail, path and extension properties
 """
 def getAllFilesInGivenDirectory(path):
-	dirs = listdir(path) # lists all files in a directory
 	files =[]
  
 	if len(dirs) != 0: # If the folder is not empty
@@ -60,10 +59,11 @@ def getAllFilesInGivenDirectory(path):
 	# Add Parent Directory
 	parentPath = getParentDirectory(path)
 	files.append({"name": "Parent Directory", "label": "[Back]", "path": parentPath, "type": "folder"})
- 
+
 	# Add An Option to Quit
 	files.append({"label": "[Quit]", "type": "quit"})
 	return files
+	
 
 """
 Returns the one back directory of a given path (..)
