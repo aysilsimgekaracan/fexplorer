@@ -119,3 +119,4 @@ dmypy.json
 test.py
 /fexplorer/linux_commands_in_python.py
 /fexplorer/db_info.py
+fexplorer/db_info.py
