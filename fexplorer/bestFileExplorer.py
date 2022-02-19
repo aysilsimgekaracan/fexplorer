@@ -7,8 +7,11 @@ from fexplorer.customscript import customScript
 def get_label(option):
     return option.get("label")
 
-
+"""
+Change Permisson of a file
+"""
 def permissionChangeCli(option):
+    
     title = "Current Permissions: " + option.get("fileDetails") + "\n"
     
     permissions = []
@@ -67,7 +70,9 @@ def permissionChangeCli(option):
     
     cli(parentDir)
                 
-        
+"""
+Menu for getting file name input to rename it
+"""      
 def renameCli(option):
         path = option.get("path")
         extension = option.get("type")
@@ -87,6 +92,9 @@ def renameCli(option):
         os.system('sleep 2')
         cli(parentDir)
 
+"""
+Menu for getting a new path from user to copy a file
+""" 
 def copyCli(option):
     path = option.get("path")
     
@@ -98,6 +106,9 @@ def copyCli(option):
     fl.cp(path, newPath) 
     cli(parentPath)
 
+"""
+Menu for getting a new path from user to move a file
+""" 
 def moveCli(option):
     path = option.get("path")
     
@@ -109,7 +120,9 @@ def moveCli(option):
     fl.mv(path, newPath)
     cli(parentPath)
 
-    
+"""
+Editing menu
+"""  
 def detailCli(option):
     path = option.get("path")
     
@@ -130,7 +143,10 @@ def detailCli(option):
         moveCli(option)
     if index == len(options) - 1:
         cli(fl.getParentDirectory(path))
-        
+
+"""
+Menu for printing the file content (if it is readable) and give options to edit and return back
+"""   
 def readFileCli(path):
     try:
         # check to see if file is readable
@@ -149,11 +165,10 @@ def readFileCli(path):
         print("Not readable.")
         os.system("sleep 2")
         cli(fl.getParentDirectory(path))
-    
-def returnHome(picker): # Return to home directory
-    path = fl.getHomeDirectory()
-    cli(path)
-    
+
+"""
+If user is pressed E while selected some file, bring detailCli() screen. Otherwise, exit
+"""  
 def edit(picker):
     if picker.all_selected != []:
         option = picker.options[picker.all_selected[0]]
@@ -161,16 +176,16 @@ def edit(picker):
     
     return (-1, None)
 
+"""
+Main screen that lists all the files and folders
+"""  
 def cli(path):
 
     options = fl.getAllFilesInGivenDirectory(path)
     title = f'Files in location: {path}'
     picker = Picker(options, title, indicator="=>", options_map_func=get_label)
     picker.multiselect = True
-    picker.register_custom_handler(ord('r'), returnHome)
     picker.register_custom_handler(ord('e'), edit)
- 
-    # picker.register_custom_handler(ord("b"), returnBack)
     
     tuples = picker.start()
     
