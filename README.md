@@ -37,7 +37,6 @@ fexplorer . --m e
 - If you see => as an indicator, you first need to select a file with SPACE and then ENTER.
 - If you see * as an indicator, only press ENTER.
 - To edit a file: First select the file with SPACE, then press E.
-- To return your home directory: Press R
 
 ## Buit With
 - [Python](https://www.python.org)
