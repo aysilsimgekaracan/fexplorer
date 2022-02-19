@@ -139,7 +139,27 @@ def detailCli(option):
         moveCli(option)
     if index == len(options) - 1:
         cli(fl.getParentDirectory(path))
-        print(fl.getParentDirectory(path))
+        
+def readFileCli(path):
+    try:
+        # check to see if file is readable
+        with open(path) as file:
+            options = ["Edit", "Back"]
+            title = file.read()
+            readFilePicker = Picker(options, title, indicator="*")
+            selectedOption, index = readFilePicker.start()
+            
+            if index == 0:
+                fl.editFile(path)
+            else:
+                cli(fl.getParentDirectory(path))
+
+    except Exception as err:
+        print("Not readable.")
+        os.system("sleep 2")
+        cli(fl.getParentDirectory(path))
+    
+    
 
 def returnHome(picker): # Return to home directory
     # path = fl.getHomeDirectory()
@@ -185,6 +205,8 @@ def cli(path):
             if option.get("label") != "[Quit]":
                 if fl.isDirectory(option.get("path")):
                     cli(option.get("path"))
+                else:
+                    readFileCli(option.get("path"))
     else:
         cli(path)
 

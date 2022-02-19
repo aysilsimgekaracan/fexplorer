@@ -6,12 +6,14 @@ import os
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("path", default=".", help="A filepath (. for the current directory)")
+    # parser.add_argument("--mode", default="n", help="n -> normal, e -> custom code", required=False)
+    
     args = parser.parse_args()
     args = vars(args)
     path = args.get("path")
-    
+
     os.system('clear')
-    
+
     if not isDirectory(path) or path == "." or path == "..":
         if path == ".":
             currentDirectory = getCurrentDirectory()

@@ -114,6 +114,15 @@ def mv(sourcePath, destinationPath):
 		print("Successful")
 	system('sleep 2')
  
+def editFile(path):
+	path = path.replace(" ", "\ ")
+	path = path.replace("(", "\(")
+	path = path.replace(")", "\)")
+ 
+	parentPath = getParentDirectory(path)
+ 
+	system(f"cd {parentPath}")
+	system(f"vi {path}")
 
 # def main():
 # 	#print(f"Your current directory: {getCurrentDirectory()}")
