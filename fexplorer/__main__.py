@@ -21,6 +21,6 @@ def main():
             parentDirectory = getParentDirectory(currentDirectory)
             cli(parentDirectory)
         else:
-            print("Your path is not a directory")
+            print("Your path is not a valid directory")
     else:
         cli(path)

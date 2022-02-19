@@ -3,6 +3,7 @@ from os.path import splitext, isdir, expanduser
 from pathlib import Path
 import subprocess
 
+
 def isDirectory(path): # Check if a given file path is a file or a directory
 	if isdir(path):
 		return True
@@ -78,6 +79,24 @@ def changePermission(permisson_list, path):
 			sum += p.get("val")
 		permissions += str(sum)
 	system(f"chmod {permissions} {path}")
+ 
+def copy(sourcePath, destinationPath):
+	destinationPath = destinationPath.replace(" ", "\ ")
+	destinationPath = destinationPath.replace("(", "\(")
+	destinationPath = destinationPath.replace(")", "\)")
+ 
+	sourcePath = sourcePath.replace(" ", "\ ")
+	sourcePath = sourcePath.replace("(", "\(")
+	sourcePath = sourcePath.replace(")", "\)")
+ 
+	if not isDirectory(destinationPath):
+		print("The new path is not valid")
+		system('sleep 2')
+	else:
+		system(f"cp {sourcePath} {destinationPath}")
+		print("Successful")
+		system('sleep 10')
+ 
 
 # def main():
 # 	#print(f"Your current directory: {getCurrentDirectory()}")

@@ -92,14 +92,24 @@ def renameCli(option):
         print("File Name is changed!")
         os.system('sleep 2')
         cli(parentDir)
-        
 
+def copyCli(option):
+    path = option.get("path")
+    
+    print("Copy " + option.get("name"))
+    newPath = input("Destination: ")
+    
+    parentPath = fl.getParentDirectory(path)
+    
+    fl.copy(path, newPath) 
+    cli(parentPath)
+    
 def detailCli(option):
     path = option.get("path")
     
     title = option.get("name") + "\n" + path + "\n" + option.get("fileDetails")
     
-    options = ["Change Permissions", "Rename", "Back"]
+    options = ["Change Permissions", "Rename", "Copy", "Back"]
     
     # if fl.isDirectory(path):
     #     options.append("Go to directory")
@@ -111,8 +121,11 @@ def detailCli(option):
         permissionChangeCli(option)
     elif index == 1:
         renameCli(option)
-    if index == 2:
-        cli(path)
+    elif index == 2:
+        copyCli(option)
+    if index == len(options) - 1:
+        cli(fl.getParentDirectory(path))
+        print(fl.getParentDirectory(path))
 
 def returnHome(picker): # Return to home directory
     # path = fl.getHomeDirectory()
