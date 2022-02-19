@@ -211,7 +211,8 @@ def cli(path):
                     if MODE.getMode() == "n":
                         readFileCli(option.get("path"))
                     else:
-                        customScript()
+                        customScript(option)
+                        cli(fl.getParentDirectory(option.get("path")))
     else:
         cli(path)
 
