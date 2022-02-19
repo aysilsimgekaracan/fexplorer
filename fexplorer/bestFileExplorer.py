@@ -1,6 +1,4 @@
-from typing import Optional
 from pick import Picker
-import curses
 import fexplorer.files as fl
 import os
 from fexplorer.mode import MODE

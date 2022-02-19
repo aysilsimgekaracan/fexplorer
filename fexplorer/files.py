@@ -1,7 +1,6 @@
 from os import listdir, getcwd, popen, rename, system
 from os.path import splitext, isdir, expanduser
 from pathlib import Path
-import subprocess
 
 
 def isDirectory(path): # Check if a given file path is a file or a directory
