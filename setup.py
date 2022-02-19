@@ -10,6 +10,7 @@ setup(
   license='MIT',        # Chose a license from here: https://help.github.com/articles/licensing-a-repository
   description = 'Simple file explorer made with python',   # Give a short description about your library
   long_description=long_description,
+  long_description_content_type='text/markdown',
   author = 'aysilsimgekaracan',                   # Type in your name
   author_email = 'aysilsimge@gmail.com',      # Type in your E-Mail
   url = 'https://github.com/aysilsimgekaracan/fexplorer',   # Provide either the link to your github or to your website
