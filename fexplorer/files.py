@@ -41,29 +41,33 @@ Finds all files and folders in a given path
 Returns list of all files with a dict of name, label, file detail, path and extension properties
 """
 def getAllFilesInGivenDirectory(path):
-	dirs = listdir(path) # lists all files in a directory
 	files =[]
- 
-	if len(dirs) != 0: # If the folder is not empty
-		max_lenght = max([len(d) for d in dirs]) + 10 # calculating some lenght for printing file details in the same order, otherwise it will look too complicated
-		
-		for file in dirs:
-			if file[0] != ".": # Exclude hidden folders
-				filePath = path + "/" + file
-				name, extension = splitext(filePath)
-				fileDetails = getFileDetails(filePath)
-				if extension == "" and isDirectory(filePath) : extension = "folder"
-				spaceLenght = max_lenght - len(file)
-				icon = u"\U0001F4C1" if isDirectory(filePath) else "  " # If it is a directory use a uniqcode char.
-				files.append({"name": file, "label": icon + " " + file + ' '*spaceLenght + fileDetails, "path": filePath, "type": extension, "fileDetails": fileDetails})
-
-	# Add Parent Directory
+	try:
+		dirs = listdir(path) # lists all files in a directory
+	
+		if len(dirs) != 0: # If the folder is not empty
+			max_lenght = max([len(d) for d in dirs]) + 10 # calculating some lenght for printing file details in the same order, otherwise it will look too complicated
+			
+			for file in dirs:
+				if file[0] != ".": # Exclude hidden folders
+					filePath = path + "/" + file
+					name, extension = splitext(filePath)
+					fileDetails = getFileDetails(filePath)
+					if extension == "" and isDirectory(filePath) : extension = "folder"
+					spaceLenght = max_lenght - len(file)
+					icon = u"\U0001F4C1" if isDirectory(filePath) else "  " # If it is a directory use a uniqcode char.
+					files.append({"name": file, "label": icon + " " + file + ' '*spaceLenght + fileDetails, "path": filePath, "type": extension, "fileDetails": fileDetails})
+	except:
+		"You don't have permission"
+	
+ 	# Add Parent Directory
 	parentPath = getParentDirectory(path)
 	files.append({"name": "Parent Directory", "label": "[Back]", "path": parentPath, "type": "folder"})
- 
+
 	# Add An Option to Quit
 	files.append({"label": "[Quit]", "type": "quit"})
 	return files
+	
 
 """
 Returns the one back directory of a given path (..)
