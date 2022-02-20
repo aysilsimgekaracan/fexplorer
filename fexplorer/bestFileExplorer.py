@@ -101,9 +101,13 @@ def copyCli(option):
     print("Copy " + option.get("name"))
     newPath = input("Destination: ")
     
-    parentPath = fl.getParentDirectory(path)
+    if newPath == "..":
+        newPath = fl.getParentDirectory(path)
+        newPath = fl.getParentDirectory(newPath)
+
+    fl.cp(path, newPath)
     
-    fl.cp(path, newPath) 
+    parentPath = fl.getParentDirectory(path)
     cli(parentPath)
 
 """
@@ -115,9 +119,13 @@ def moveCli(option):
     print("Move" + option.get("name"))
     newPath = input("Destination: ")
     
-    parentPath = fl.getParentDirectory(path)
+    if newPath == "..":
+        newPath = fl.getParentDirectory(path)
+        newPath = fl.getParentDirectory(newPath)
     
     fl.mv(path, newPath)
+    
+    parentPath = fl.getParentDirectory(path)
     cli(parentPath)
 
 """

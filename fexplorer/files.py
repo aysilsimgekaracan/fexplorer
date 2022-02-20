@@ -107,12 +107,12 @@ def changePermission(permisson_list, path):
 Copy a file to another destination using cp command
 """
 def cp(sourcePath, destinationPath):
-	destinationPath = formatPath(destinationPath)
 	sourcePath = formatPath(sourcePath)
 
 	if not isDirectory(destinationPath):
 		print("The new path is not valid")
 	else:
+		destinationPath = formatPath(destinationPath)
 		system(f"cp -r {sourcePath} {destinationPath}")
 		print("Successful")
 	
@@ -122,13 +122,13 @@ def cp(sourcePath, destinationPath):
 Move a file to another destination using mv command
 """
 def mv(sourcePath, destinationPath):
-	destinationPath = formatPath(destinationPath)
 	sourcePath = formatPath(sourcePath)
 
 	if not isDirectory(destinationPath):
 		print("The new path is not valid")
 	else:
-		system(f"mv -r {sourcePath} {destinationPath}")
+		destinationPath = formatPath(destinationPath)
+		system(f"mv {sourcePath} {destinationPath}")
 		print("Successful")
 	system('sleep 2')
 
